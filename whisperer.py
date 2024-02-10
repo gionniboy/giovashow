@@ -16,14 +16,10 @@ def extract_audio_transcript(video_path):
         audio = video.audio
         audio.write_audiofile(audio_output_path)
 
-    model = whisper.load_model("tiny")
-    # audio = whisper.load_audio(audio_output_path)
-
-    transcript = model.transcribe(audio_output_path)
-
-    # Recognize speech from the extracted audio using Whisper
-    # transcript = whisper.transcribe(video_path, language="it-IT")
+    model = whisper.load_model("large")
+    transcript = model.transcribe(audio_output_path, language="it")
 
     print("Audio transcript:")
     print(transcript)
+    print(transcript["text"])
     return transcript["text"]
