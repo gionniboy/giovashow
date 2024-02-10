@@ -26,10 +26,10 @@ def extract_audio_transcript(video_path):
             transcript = recognizer.recognize_google(audio, language="it-IT")
             print("Audio transcript:")
             print(transcript)
+            return transcript
         except sr.UnknownValueError:
             print("Google Web Speech API could not understand audio")
         except sr.RequestError as e:
             print(f"Could not request results from Google Web Speech API; {e}")
 
-    # Delete temporary audio file
     # os.remove(audio_output_path)
