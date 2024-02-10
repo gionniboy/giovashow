@@ -13,10 +13,9 @@ def get_instagram_credentials():
     login = os.environ.get("INSTAGRAM_LOGIN")
     password = os.environ.get("INSTAGRAM_PASSWORD")
     if login is None or password is None:
-        print(
+        raise EnvironmentError(
             "Please set INSTAGRAM_LOGIN and INSTAGRAM_PASSWORD environment variables."
         )
-        return None, None
     else:
         return login, password
 
