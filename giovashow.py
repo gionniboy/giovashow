@@ -5,7 +5,9 @@ import whisperer
 from utils import split_path_and_filename, extract_audio
 
 
-def is_anagram(str1, str2):
+def is_anagram(str1: str, str2: str) -> bool:
+    if not isinstance(str1, str) or not isinstance(str2, str):
+        raise ValueError("Both inputs must be strings")
     str1 = str1.replace(" ", "").lower()
     str2 = str2.replace(" ", "").lower()
     return sorted(str1) == sorted(str2)

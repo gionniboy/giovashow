@@ -1,9 +1,10 @@
 import os
+from typing import Tuple, Optional
 
 import instaloader
 
 
-def get_instagram_credentials():
+def get_instagram_credentials() -> Tuple[Optional[str], Optional[str]]:
     """
     Retrieves Instagram login and password from environment variables.
     Returns a tuple (login, password).
@@ -18,7 +19,7 @@ def get_instagram_credentials():
         return login, password
 
 
-def download_last_post(username, login, password):
+def download_last_post(username: str, login: str, password: str) -> Optional[str]:
     loader = instaloader.Instaloader()
     loader.login(login, password)
 

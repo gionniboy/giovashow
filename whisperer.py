@@ -1,7 +1,7 @@
 import whisper
 
 
-def extract_transcript(audio_path):
+def extract_transcript(audio_path: str) -> str:
     """
     Extract transcript from the audio using Whisper.
     Returns the transcript text.
