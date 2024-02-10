@@ -2,8 +2,6 @@ import os
 
 import instaloader
 
-import whisperer
-
 
 def get_instagram_credentials():
     """
@@ -26,24 +24,22 @@ def download_last_post(username, login, password):
 
     try:
         profile = instaloader.Profile.from_username(loader.context, username)
-
-        # Get the last post
         posts = profile.get_posts()
-        post = None
-        for p in posts:
-            post = p
-            break
-
-        if post:
-            # Download the post
-            loader.download_post(post, target=profile.username)
-            print("Post downloaded successfully!")
-            video_path = f"{profile.username}/{post.date_utc.strftime('%Y-%m-%d_%H-%M-%S_UTC')}.mp4"
-            whisperer.extract_audio_transcript(video_path)
-
+        last_post = next(posts, None)
+        if last_post:
+            video_filename = f"{profile.username}/{last_post.date_utc.strftime('%Y-%m-%d_%H-%M-%S_UTC')}.mp4"
+            video_path = os.path.join(os.getcwd(), video_filename)
+            if os.path.exists(video_path):
+                print(f"Post already downloaded: {os.path.relpath(video_path)}")
+                return os.path.relpath(video_path)
+            else:
+                loader.download_post(last_post, target=profile.username)
+                print("Post downloaded successfully!")
+                print(f"Video saved as: {os.path.relpath(video_path)}")
+                return os.path.relpath(video_path)
         else:
             print(f"No posts found for '{username}'.")
     except instaloader.exceptions.ProfileNotExistsException:
         print(f"Profile with username '{username}' does not exist.")
-    except Exception as e:
-        print(f"An error occurred: {str(e)}")
+    except Exception as err:
+        print(f"An error occurred: {str(err)}")
