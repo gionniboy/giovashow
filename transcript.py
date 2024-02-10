@@ -23,7 +23,7 @@ def extract_audio_transcript(video_path):
         audio = recognizer.record(source)
 
         try:
-            transcript = recognizer.recognize_google(audio)
+            transcript = recognizer.recognize_google(audio, language="it-IT")
             print("Audio transcript:")
             print(transcript)
         except sr.UnknownValueError:
