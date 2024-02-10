@@ -1,5 +1,7 @@
 import sys
 
+import instagram
+
 
 def is_anagram(str1, str2):
     str1 = str1.replace(" ", "").lower()
@@ -8,17 +10,11 @@ def is_anagram(str1, str2):
 
 
 def main():
-    if len(sys.argv) != 3:
-        print("Usage: python script.py <sentence1> <sentence2>")
-        sys.exit(1)
-
-    frase1 = sys.argv[1]
-    frase2 = sys.argv[2]
-
-    if is_anagram(frase1, frase2):
-        print("sentences are  anagrams.")
-    else:
-        print("sentences are not anagrams.")
+    # Replace 'username' with the Instagram username you want to download the last post from
+    username = "giovashow"
+    # Replace 'your_login' and 'your_password' with your Instagram login credentials
+    login, password = instagram.get_instagram_credentials()
+    instagram.download_last_post(username, login, password)
 
 
 if __name__ == "__main__":
