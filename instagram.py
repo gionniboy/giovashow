@@ -3,6 +3,7 @@ import os
 import instaloader
 
 import transcript
+import whisperer
 
 
 def get_instagram_credentials():
@@ -40,7 +41,8 @@ def download_last_post(username, login, password):
             loader.download_post(post, target=profile.username)
             print("Post downloaded successfully!")
             video_path = f"{profile.username}/{post.date_utc.strftime('%Y-%m-%d_%H-%M-%S_UTC')}.mp4"
-            transcript.extract_audio_transcript(video_path)
+            # transcript.extract_audio_transcript(video_path)
+            whisperer.extract_audio_transcript(video_path)
 
         else:
             print(f"No posts found for '{username}'.")
